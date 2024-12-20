@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+{% if user.is_authenticated %}
+
+<h1>Players</h1>
+
+<table class="table table-striped table-hover table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+      <th scope="col">Title</th>
+      <th scope="col">FIDE Rating</th>
+      <th scope="col">Created At</th>
+      <th scope="col">ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+{% if players %}
+	{% for player in players %}
+		<tr>
+			<td>{{ player.first_name }} {{ player.last_name }}</td>
+			<td>{{ player.address }}</td>
+			<td>{{ player.title }}</td>
+			<td>{{ player.FIDE_rating }}</td>
+			<td>{{ player.created_at }}</td>
+			<td><a href="{% url 'player' player.id %}">{{ player.id }}</a></td>
+		</tr>
+	{% endfor %}
+
+{% endif %}
+
+	
+	  </tbody>
+	</table>
+
+
+
+
+
+{% else %}
+
+<div class="col-md-6 offset-md-3">
+<h1>Login</h1>
+<br/>
+
+<form method="POST" action="{% url 'home' %}">
+	{% csrf_token %}
+
+  <div class="mb-3">
+    <input type="text" class="form-control" name="username", placeholder="Username" required>
+    
+  </div><br/>
+  <div class="mb-3"> 
+    <input type="password" class="form-control" name="password", placeholder="Password" required>
+  </div>
+  <br/>
+  <button type="submit" class="btn btn-secondary">Login</button>
+
+
+</form>
+
+
+
+
+{% endif %}
+
+{% endblock %}

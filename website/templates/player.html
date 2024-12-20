@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Player Profile:</h1>
+
+			{{ player_profile.first_name }} {{ player_profile.last_name }} <br/>
+			{{ player_profile.address }} <br/>
+			{{ player_profile.title }} <br/>
+			{{ player_profile.FIDE_rating }} <br/>
+			{{ player_profile.created_at }} <br/>
+			{{ player_profile.id }} <br/>
+
+
+<br/><br/>
+<a href="{% url 'home' %}" class="btn btn-secondary">Return</a>
+
+<a href="{% url 'remove_player' player_profile.id %}" class="btn btn-danger">Remove</a>
+
+<a href="{% url 'update_player' player_profile.id %}" class="btn btn-secondary">Update Player</a>
+
+
+
+{% endblock %}
